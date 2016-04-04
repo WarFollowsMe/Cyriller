@@ -20,14 +20,22 @@ namespace Cyriller
 
         public SpeechPartsEnum DetermineSpeechPart(string Word)
         {
-            string[] ends = new string[] { "ый", "ий", "ой", "ся", "ая", "яя", "ое", "ее" };
-
-            if (ends.Any(val => Word.EndsWith(val)))
+            //string[] ends = new string[] { "ый", "ий", "ой", "ся", "ая", "яя", "ое", "ее" };
+            try
+            {
+                var nou = nouCollection.Get(Word);
+                return SpeechPartsEnum.Noun;
+            }
+            catch
             {
                 return SpeechPartsEnum.Adjective;
             }
+            //if (ends.Any(val => Word.EndsWith(val)))
+            //{
+            //    return SpeechPartsEnum.Adjective;
+            //}
 
-            return SpeechPartsEnum.Noun;
+            //return SpeechPartsEnum.Noun;
         }
 
         public CyrResult Decline(string Phrase, GetConditionsEnum Condition)
